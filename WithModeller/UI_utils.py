@@ -22,3 +22,5 @@ def UI_cleanup_default_scene():
     # Remove the defaul Cube from the original scene
     objs = bpy.data.objects
     objs.remove(objs["Cube"], do_unlink=True)
+    objs.remove(objs["Camera"], do_unlink=True)
+    objs.remove(objs["Light"], do_unlink=True)

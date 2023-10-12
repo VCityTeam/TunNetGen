@@ -9,7 +9,10 @@ import math
 import sys, os
 
 sys.path.append(os.path.dirname(__file__))
-from bmesh_utils import bmesh_get_boundary_edges
+from bmesh_utils import (
+    bmesh_assert_euler_characteristic,
+    bmesh_get_boundary_edges,
+)
 
 
 def bmesh_of_half_icosphere(radius, subdivisions, angle):
@@ -123,29 +126,7 @@ def bmesh_of_half_icosphere(radius, subdivisions, angle):
         print("         - expected number:", expected_boundary_edge_count)
         print("         - resulting number:", resulting_boundary_edge_count)
 
+    bmesh_assert_euler_characteristic(
+        bmesh_result, 1, "Half-sphere topology is wrong."
+    )
     return bmesh_result
-
-
-def bmesh_of_cylinder_along_X(radius, half_length, segments):
-    bmesh_cylinder = bmesh.new()
-    bmesh.ops.create_cone(
-        bmesh_cylinder,
-        cap_ends=False,
-        cap_tris=False,
-        segments=segments,
-        radius1=radius,
-        radius2=radius,
-        depth=2 * half_length,
-    )
-    bmesh.ops.rotate(
-        bmesh_cylinder,
-        verts=bmesh_cylinder.verts,
-        # cent=(0.0, 0.0, 0.0),
-        matrix=mathutils.Matrix.Rotation(math.radians(90.0), 4, "Y"),
-    )
-    bmesh.ops.translate(
-        bmesh_cylinder,
-        verts=bmesh_cylinder.verts,
-        vec=(-3 * half_length, 0.0, 0.0),  # FIXME
-    )
-    return bmesh_cylinder

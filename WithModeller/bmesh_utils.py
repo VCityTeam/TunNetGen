@@ -1,3 +1,4 @@
+import sys
 import bmesh
 
 
@@ -25,6 +26,51 @@ def bmesh_duplicate(src_bmesh):
 
 def bmesh_get_boundary_edges(src_bmesh):
     return [ele for ele in src_bmesh.edges if ele.is_boundary]
+
+
+def bmesh_euler_characteristic(src_bmesh):
+    # https://en.wikipedia.org/wiki/Euler_characteristic
+    v_num = len(src_bmesh.verts)
+    e_num = len(src_bmesh.edges)
+    f_num = len(src_bmesh.faces)
+    return v_num - e_num + f_num
+
+
+def bmesh_assert_euler_characteristic(src_bmesh, expected_characteristic, msg):
+    if bmesh_euler_characteristic(src_bmesh) == expected_characteristic:
+        return
+    print(msg)
+    print(
+        "Actual Euler characteristic is ",
+        bmesh_euler_characteristic(src_bmesh),
+        " when the expected Euler characteristic was ",
+        expected_characteristic,
+        ".",
+    )
+    print("Exiting.")
+    sys.exit(1)
+
+
+def bmesh_triangulate_quad_faces(src_bmesh, faces):
+    """Triangulate given faces
+
+    Args:
+        src_bmesh (_type_): the bmesh to which belong the faces
+        faces (_type_): a list of faces to be triangulated
+    """
+    quad_faces = []
+    for f in faces:
+        if len(f.verts) == 4:
+            quad_faces.append(f)
+        else:
+            print("bmesh_triangulate_quad_faces: non quad face given. Exiting")
+            sys.exit(1)
+
+    for q in quad_faces:
+        bmesh.ops.connect_verts(
+            src_bmesh,
+            verts=[q.verts[0], q.verts[2]],
+        )
 
 
 def bmesh_join(list_of_bmeshes, normal_update=False):
