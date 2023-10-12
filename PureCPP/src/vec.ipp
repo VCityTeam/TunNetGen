@@ -102,32 +102,32 @@ T gbl::dot(const gbl::Vec<N, T>& v1, const gbl::Vec<N, T>& v2)
   }
   return sum;
 }
-  template <unsigned int N>
-float gbl::norm2(const gbl::Vec<N, float>& v)
+  template <unsigned int N, typename T>
+T gbl::norm2(const gbl::Vec<N, T>& v)
 {
   return dot(v,v);
 }
-  template <unsigned int N>
-float gbl::norm(const gbl::Vec<N, float>& v)
+  template <unsigned int N, typename T>
+T gbl::norm(const gbl::Vec<N, T>& v)
 {
   return std::sqrt(norm2(v));
 }
-  template <unsigned int N>
-gbl::Vec<N, float> gbl::normalize(const gbl::Vec<N, float>& v)
+  template <unsigned int N, typename T>
+gbl::Vec<N, T> gbl::normalize(const gbl::Vec<N, T>& v)
 {
-  const float n = norm(v);
+  const T n = norm(v);
   return v/n;
 }
-  template <unsigned int N>
-gbl::Vec<N, float> gbl::floor(const Vec<N, float>& v)
+  template <unsigned int N, typename T>
+gbl::Vec<N, T> gbl::floor(const Vec<N, T>& v)
 {
   auto ans = v;
   for(auto& x:ans)
     x = std::floor(x);
   return ans;
 }
-  template <unsigned int N>
-gbl::Vec<N, float> gbl::fract(const Vec<N, float>& v)
+  template <unsigned int N, typename T>
+gbl::Vec<N, T> gbl::fract(const Vec<N, T>& v)
 {
   return v-gbl::floor(v);
 }

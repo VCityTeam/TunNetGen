@@ -67,6 +67,7 @@ namespace gbl
   using vec2f = Vec<2, float>;
   using vec3f = Vec<3, float>;
   using vec4f = Vec<4, float>;
+  using vec3 = Vec<3, double>;
 
 
   using gbl::Vec;
@@ -101,21 +102,21 @@ namespace gbl
 
   template <unsigned int N, typename T>
     T dot(const Vec<N, T>& vec, const Vec<N, T>& vec2);
-  template <unsigned int N>
-    float norm2(const Vec<N, float>& vec);
   template <unsigned int N, typename T>
-    float norm(const Vec<N, float>& vec);
-  template <unsigned int N>
-    Vec<N, float> normalize(const Vec<N, float>& vec);
+    T norm2(const Vec<N, T>& vec);
+  template <unsigned int N, typename T>
+    T norm(const Vec<N, T>& vec);
+  template <unsigned int N, typename T>
+    Vec<N, T> normalize(const Vec<N, T>& vec);
 
   template <unsigned int N, typename T>
     std::string to_string(const Vec<N, T>& v);
 
-  template <unsigned int N>
-    Vec<N, float> floor(const Vec<N, float>& v);
+  template <unsigned int N, typename T>
+    Vec<N, T> floor(const Vec<N, T>& v);
 
-  template <unsigned int N>
-    Vec<N, float> fract(const Vec<N, float>& v);
+  template <unsigned int N, typename T>
+    Vec<N, T> fract(const Vec<N, T>& v);
 }
 
 template <unsigned int N, typename T>
@@ -128,5 +129,6 @@ extern template class gbl::Vec<3, unsigned int>;
 extern template class gbl::Vec<2, float>;
 extern template class gbl::Vec<3, float>;
 extern template class gbl::Vec<4, float>;
+extern template class gbl::Vec<3, double>;
 
 #endif

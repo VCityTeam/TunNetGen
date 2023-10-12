@@ -1,9 +1,10 @@
 #include <iostream>
+#include <iomanip>
 
 #include "lidar.h"
 
 
-void lidar::record(const gbl::vec3f& pos, const sdfable& sc, std::ostream& os)
+void lidar::record(const gbl::vec3& pos, const sdfable& sc, std::ostream& os)
 {
   using std::numbers::pi;
   float dphi = 2*pi/(Nphi-1);
@@ -13,10 +14,10 @@ void lidar::record(const gbl::vec3f& pos, const sdfable& sc, std::ostream& os)
   for(int i=0; i<Nphi; ++i){
     float theta = -pi;
     for(int j=0;j<Ntheta;++j){
-      gbl::vec3f dir(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta));
-      gbl::vec3f intersection;
+      gbl::vec3 dir(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta));
+      gbl::vec3 intersection;
       if(raymarch(pos, dir, sc, intersection))
-        os << intersection << std::endl;
+        os << std::setprecision (15) << intersection << std::endl;
 
       theta+=dtheta;
     }
@@ -24,8 +25,8 @@ void lidar::record(const gbl::vec3f& pos, const sdfable& sc, std::ostream& os)
   }
 }
 
-bool lidar::raymarch(const gbl::vec3f& pos, const gbl::vec3f& dir, 
-  const sdfable& sc, gbl::vec3f& intersection)
+bool lidar::raymarch(const gbl::vec3& pos, const gbl::vec3& dir, 
+  const sdfable& sc, gbl::vec3& intersection)
 {
   float depth = 0.0f;
   // warning : these parameter comes from nowhere
