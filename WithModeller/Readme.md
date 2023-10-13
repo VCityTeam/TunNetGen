@@ -8,6 +8,12 @@ blender --python UI_half_sphere.py
 blender --python UI_cylinder.py 
 ```
 
+```bash
+blender --python UI_two_intersecting_cylinders.py 
+```
+should yield something like
+<img src="Pictures/Two_Intersecting_Cylinders.png" alt="Blender Python Two Cylinders" width="800"/>
+
 ## Blender tricks
 * [Increase vertices to a cylinder](https://blender.stackexchange.com/questions/193384/i-want-to-increase-the-number-of-vertices-in-a-cylinder)
 * [Deleting faces](https://www.youtube.com/watch?v=At23FTDEu7E): select the face and use the `x` key

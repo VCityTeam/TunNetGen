@@ -15,6 +15,7 @@ from bmesh_utils import bmesh_assert_genus_number_boundaries
 from UI_utils import (
     promote_bmesh_to_UI_object,
     UI_cleanup_default_scene,
+    UI_boolean_union,
     demote_UI_object_with_mesh_to_bmesh,
 )
 
@@ -54,28 +55,9 @@ if __name__ == "__main__":
     bpy.context.collection.objects.link(obj_second_cylinder)
 
     ### Boolean intersection
-    # Although the debate/demand seems to date back to 2013, refer e.g. to
-    #  https://blenderartists.org/t/bmesh-boolean/589555
-    #
-    # We thus resolve to working at the UI (bpy) level, refer e.g. to
-    #   https://blender.stackexchange.com/questions/129853/boolean-on-two-simple-bmesh
-    # and
-    #   https://blender.stackexchange.com/questions/45004/how-to-make-boolean-modifiers-with-python
-    # for its comment on applying the modifier.
+    UI_boolean_union(obj_first_cylinder, obj_second_cylinder)
 
-    first_object = obj_first_cylinder
-    second_object = obj_second_cylinder
-    print("first_object", first_object.name)
-
-    mod = first_object.modifiers.new(name="Boolean", type="BOOLEAN")
-    mod.operation = "UNION"
-    mod.object = second_object
-    bpy.context.view_layer.objects.active = first_object
-    bpy.ops.object.modifier_apply(modifier="Boolean")
-    objs = bpy.data.objects
-    objs.remove(second_object, do_unlink=True)
-
-    bmesh_result = demote_UI_object_with_mesh_to_bmesh(first_object)
+    bmesh_result = demote_UI_object_with_mesh_to_bmesh(obj_first_cylinder)
 
     bmesh_assert_genus_number_boundaries(
         bmesh_result,

@@ -30,3 +30,36 @@ def UI_cleanup_default_scene():
     objs.remove(objs["Cube"], do_unlink=True)
     objs.remove(objs["Camera"], do_unlink=True)
     objs.remove(objs["Light"], do_unlink=True)
+
+
+def UI_boolean_union(
+    base_object: bpy.types.Object, united_object: bpy.types.Object, delete=True
+):
+    """Realise the boolean union of the two bpy objects. Although the modifier
+    is symmetric in terms of its operands, this function chooses (by default) to
+    delete the second argument object.
+    Args:
+        base_object (_type_): the base object to which the united_object gets
+                              united with.
+        united_object (_type_): the object to be united from.
+        delete (Boolean): when True united_object gets deleted
+    """
+    ### Boolean intersection
+    # Although the debate/demand seems to date back to 2013, refer e.g. to
+    #  https://blenderartists.org/t/bmesh-boolean/589555
+    # bmesh module doesn't seem to offer boolean operators.
+    # We thus resolve to working at the UI (bpy) level, refer e.g. to
+    #   https://blender.stackexchange.com/questions/129853/boolean-on-two-simple-bmesh
+    # and
+    #   https://blender.stackexchange.com/questions/45004/how-to-make-boolean-modifiers-with-python
+    # for its comment on applying the modifier.
+
+    mod = base_object.modifiers.new(name="Boolean", type="BOOLEAN")
+    mod.operation = "UNION"
+    mod.object = united_object
+    bpy.context.view_layer.objects.active = base_object
+    bpy.ops.object.modifier_apply(modifier="Boolean")
+
+    if delete:
+        objs = bpy.data.objects
+        objs.remove(united_object, do_unlink=True)
