@@ -21,7 +21,7 @@ blender --python UI_cylinder.py
 * [Exporting bmesh to PLY](https://blenderartists.org/t/mesh-to-point-cloud/1124144/29)
 * [edge/face loops using python](https://blenderartists.org/t/how-do-i-work-with-edge-face-loops-using-python/1228205/2)
 * [Bmesh structure design](https://wiki.blender.org/wiki/Source/Modeling/BMesh/Design#Connectivity_Cycles)
-
+* [Shaping Models With BMesh](https://behreajj.medium.com/shaping-models-with-bmesh-in-blender-2-9-2f4fcc889bf0)
 
 ## Modeling notes
 

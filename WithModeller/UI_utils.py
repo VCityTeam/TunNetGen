@@ -15,6 +15,12 @@ def promote_bmesh_to_UI_object(src_bmesh: bmesh.types.BMesh, name):
     return bpy.data.objects.new(name, mesh_result)
 
 
+def demote_UI_object_with_mesh_to_bmesh(src_object):
+    bmesh_result = bmesh.new()
+    bmesh_result.from_mesh(src_object.data)
+    return bmesh_result
+
+
 def UI_cleanup_default_scene():
     # Avoid showing the splash screen
     bpy.context.preferences.view.show_splash = False

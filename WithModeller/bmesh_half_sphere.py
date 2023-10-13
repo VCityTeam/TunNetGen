@@ -10,7 +10,7 @@ import sys, os
 
 sys.path.append(os.path.dirname(__file__))
 from bmesh_utils import (
-    bmesh_assert_euler_characteristic,
+    bmesh_assert_genus_number_boundaries,
     bmesh_get_boundary_edges,
 )
 
@@ -122,11 +122,16 @@ def bmesh_of_half_icosphere(radius, subdivisions, angle):
     # Check that the correction was efficient:
     resulting_boundary_edge_count = len(bmesh_get_boundary_edges(bmesh_result))
     if expected_boundary_edge_count != resulting_boundary_edge_count:
-        print("Warning: wrong number of resulting boundary edge count:")
-        print("         - expected number:", expected_boundary_edge_count)
-        print("         - resulting number:", resulting_boundary_edge_count)
+        print(
+            "Warning: wrong number of resulting boundary edge count: ",
+            "expected",
+            expected_boundary_edge_count,
+            "but got",
+            resulting_boundary_edge_count,
+        )
 
-    bmesh_assert_euler_characteristic(
-        bmesh_result, 1, "Half-sphere topology is wrong."
+    bmesh_assert_genus_number_boundaries(
+        bmesh_result, 0, 1, "Half-sphere topology is wrong."
     )
+
     return bmesh_result

@@ -31,7 +31,7 @@ if __name__ == "__main__":
     ### A cylinder with capped ends (half-spheres).
     capped_cylinder = cylinder(radius=radius * 1.1, length=length * 0.9)
     bmesh_capped_cylinder = capped_cylinder.bmesh_of_cylinder_with_taps(
-        subdivisions=4
+        subdivisions=6
     )
     bmesh.ops.translate(
         bmesh_capped_cylinder,

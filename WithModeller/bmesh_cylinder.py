@@ -14,8 +14,7 @@ from bmesh_utils import (
     bmesh_triangulate_quad_faces,
     bmesh_join,
     bmesh_get_boundary_edges,
-    bmesh_euler_characteristic,
-    bmesh_assert_euler_characteristic,
+    bmesh_assert_genus_number_boundaries,
 )
 
 
@@ -105,20 +104,24 @@ class cylinder:
             verts=bmesh_cylinder.verts,
             matrix=mathutils.Matrix.Rotation(math.radians(90.0), 4, "Y"),
         )
-        bmesh_assert_euler_characteristic(
-            bmesh_cylinder, 0, "Open-ended cylinder topology is wrong."
+
+        bmesh_assert_genus_number_boundaries(
+            bmesh_cylinder, 0, 2, "Open-ended cylinder topology is wrong."
         )
         return bmesh_cylinder
 
-    def bmesh_of_cylinder_with_taps(self, subdivisions):
-        """_summary_
-
+    def bmesh_of_cylinder_with_taps(self, subdivisions, centered=True):
+        """
+        Builds a triangulated cylinder (with principal axis being the X axis)
+        terminated (on both ends) by two half-spheres.
         Args:
-            radius (_type_): radius of the cylinder
-            body_length (_type_): the length of the cylinder without counting the
-                                  half sphere taps
             subdivisions (_type_): number of subdivisions of the half-spheres
                                    used to tap the cylinder's ends.
+            centered (bool, optional): Whether the cylinder should be centered
+            on the y axis or not. Defaults to True.
+
+        Returns:
+          bmesh: the constructed capped cylinder.
         """
 
         bmesh_X_plus_cap = bmesh_of_half_icosphere(
@@ -165,10 +168,11 @@ class cylinder:
         bmesh_triangulate_quad_faces(bmesh_one_cap_cylinder, bridge["faces"])
         del bridge
 
-        bmesh_assert_euler_characteristic(
+        bmesh_assert_genus_number_boundaries(
             bmesh_one_cap_cylinder,
+            0,
             1,
-            "The topology of the on side capped cylinder is wrong.",
+            "The topology of the one side capped cylinder is wrong.",
         )
 
         ### Proceed with tapping the second cylinder end
@@ -192,9 +196,16 @@ class cylinder:
         bmesh_triangulate_quad_faces(bmesh_capped_cylinder, bridge["faces"])
         del bridge
 
-        bmesh_assert_euler_characteristic(
+        if centered:
+            bmesh.ops.translate(
+                bmesh_capped_cylinder,
+                verts=bmesh_capped_cylinder.verts,
+                vec=(-self.length / 2.0, 0.0, 0.0),
+            )
+        bmesh_assert_genus_number_boundaries(
             bmesh_capped_cylinder,
-            2,
+            0,
+            0,
             "The topology of the both sides capped cylinder is wrong.",
         )
 
