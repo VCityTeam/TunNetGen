@@ -75,6 +75,13 @@ int main()
 
   // add noise 
   main = std::make_shared<opDisplace>(main, f);
+
+  // translate to be in Lyon and scale by 10
+  const gbl::vec3 lyon{1842822.798333, 5176402.986592, 0.0};
+  // const gbl::vec3 lyon{0.0, 0.0, 0.0}; 
+  main = std::make_shared<opScale>(main, 10.0);
+  main = std::make_shared<opTranslate>(main, lyon);
+  
   // create the lidar sensor and the destination file
   std::ofstream ofs("pc.xyz");
   lidar mlidar;
@@ -82,12 +89,12 @@ int main()
   mlidar.Ntheta = 500;
 
   // different poses because the cave network is big 
-  mlidar.record(gbl::vec3{0.0, 0.0, 0.0}, *main, ofs);
-  mlidar.record(gbl::vec3{-5.0, 0.0, 0.0}, *main, ofs);
-  mlidar.record(gbl::vec3{-9.0, 0.0, 0.0}, *main, ofs);
-  mlidar.record(gbl::vec3{5.0, 0.0, 0.0}, *main, ofs);
-  mlidar.record(gbl::vec3{8.5, 0.0, 0.0}, *main, ofs);
-  mlidar.record(gbl::vec3{8.0, 1.0, 0.0}, *main, ofs);
+  mlidar.record(gbl::vec3{0.0, 0.0, 0.0}  * 10.0 + lyon, *main, ofs);
+  mlidar.record(gbl::vec3{-5.0, 0.0, 0.0} * 10.0 + lyon, *main, ofs);
+  mlidar.record(gbl::vec3{-9.0, 0.0, 0.0} * 10.0 + lyon, *main, ofs);
+  mlidar.record(gbl::vec3{5.0, 0.0, 0.0}  * 10.0 + lyon, *main, ofs);
+  mlidar.record(gbl::vec3{8.5, 0.0, 0.0}  * 10.0 + lyon, *main, ofs);
+  mlidar.record(gbl::vec3{8.0, 1.0, 0.0}  * 10.0 + lyon, *main, ofs);
 
   return 0;
 }
