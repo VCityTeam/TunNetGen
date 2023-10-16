@@ -6,6 +6,9 @@
 
 
 // based on https://iquilezles.org/articles/distfunctions/
+// More information about the licence (from https://iquilezles.org)
+// "Legal: Code in this website or in my Shadertoy account that implements an algorithm is under the MIT license.
+// Code in this website or in my Shadertoy account that implements an artwork is considered to be the artwork, and is copyrighted.
 
 struct sdfable
 {
