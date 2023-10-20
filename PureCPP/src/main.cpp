@@ -83,7 +83,7 @@ int main()
   main = std::make_shared<opTranslate>(main, lyon);
   
   // create the lidar sensor and the destination file
-  std::ofstream ofs("pc.xyz");
+  std::ofstream ofs("output/pc.xyz");
   lidar mlidar;
   mlidar.Nphi = 500;
   mlidar.Ntheta = 500;
