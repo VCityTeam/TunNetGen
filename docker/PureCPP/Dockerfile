@@ -12,4 +12,4 @@ RUN mkdir build
 RUN cmake -B build 
 RUN make -C build
 
-CMD [".build/tunNetGen"]
+CMD ["./build/tunNetGen"]
