@@ -9,4 +9,4 @@ WORKDIR build
 RUN cmake ..
 RUN make
 
-CMD [./tunNetGen]
+CMD ["./tunNetGen"]
