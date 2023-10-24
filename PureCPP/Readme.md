@@ -1,21 +1,26 @@
 
 # CPP version
 
-## Building things
+## Building
 
 ```bash
-cd $(git rev-parse --show-cdup)
 cd PureCpp
-mkdir build && cd build
-cmake ..
-make
+mkdir build 
+cmake -B build
+make -C build
 ```
 
-## Running things
+## Running
 
 The following command
 ```bash
-FIXME
+./build/tunNetGen
 ```
-should yield something like
+
+You can use the help for more configuration
+```bash
+./build/tunNetGen --help
+```
+
+The point cloud generated should yield to this
 <img src="Doc/Pictures/Pure_cpp_result_early_version.png" alt="In CPP" width="800"/>

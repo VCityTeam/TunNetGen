@@ -6,11 +6,24 @@
 #include <limits>
 #include <random>
 
+#include "CLI11.hpp"
+
 #include "vec.h"
 #include "lidar.h"
 
-int main()
+int main(int argc, char* argv[])
 {
+
+  // Parse the command line argument
+  CLI::App app{"Creation of cave network as if a lidar was used."};
+  // argv = app.ensure_utf8(argv);
+
+  std::string out = "out.xyz";
+  app.add_option("-o, --out", out, "Output filename as an .xyz");
+  int n_sample = 500;
+  app.add_option("-N, --num_sample", n_sample, "Numbers of samples for the lidar");
+
+  CLI11_PARSE(app, argc, argv);
 
   // Create the cave network
   gbl::vec3 p00{-10.0, 0.0, 0.0};
@@ -18,7 +31,7 @@ int main()
   std::shared_ptr<sdfable> main = std::make_shared<cylinder>(p00, p01, 1.0);
   main = std::make_shared<opInv>(main);
 
-  // add the laterals 
+  // Add the laterals 
   for(int i = -8; i<=8; i+=4)
   {
     gbl::vec3 p10{float(i), -5.0, 0.0};
@@ -27,7 +40,7 @@ int main()
     main = std::make_shared<opSub>(main, c0);
   }
 
-  // displacement function to have non homogeneous wall 
+  // Displacement function to have non homogeneous wall 
   auto f = [](const gbl::vec3& p)
   {    
     // Based on www.shadertoy.com/view/4dS3Wd
@@ -73,20 +86,19 @@ int main()
     return fbm(p);
   };
 
-  // add noise 
+  // Add noise 
   main = std::make_shared<opDisplace>(main, f);
 
-  // translate to be in Lyon and scale by 10
+  // Translate to be in Lyon and scale by 10
   const gbl::vec3 lyon{1842822.798333, 5176402.986592, 0.0};
-  // const gbl::vec3 lyon{0.0, 0.0, 0.0}; 
   main = std::make_shared<opScale>(main, 10.0);
   main = std::make_shared<opTranslate>(main, lyon);
   
-  // create the lidar sensor and the destination file
-  std::ofstream ofs("output/pc.xyz");
+  // Create the lidar sensor and the destination file
+  std::ofstream ofs(out);
   lidar mlidar;
-  mlidar.Nphi = 500;
-  mlidar.Ntheta = 500;
+  mlidar.Nphi = n_sample;
+  mlidar.Ntheta = n_sample;
 
   // different poses because the cave network is big 
   mlidar.record(gbl::vec3{0.0, 0.0, 0.0}  * 10.0 + lyon, *main, ofs);
