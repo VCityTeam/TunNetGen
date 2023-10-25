@@ -5,11 +5,12 @@ RUN apk add --no-cache g++
 RUN apk add --no-cache make
 RUN apk add --no-cache cmake
 
-COPY PureCPP PureCPP
+COPY PureCPP TunNetGenCpp
 
-WORKDIR PureCPP
+WORKDIR TunNetGenCpp
 RUN mkdir build
 RUN cmake -B build 
-RUN make -C build
+RUN make -j -C build
 
-CMD ["./build/tunNetGen"]
+ENTRYPOINT ["./build/tunNetGen"]
+CMD ["-o","output/pc.xyz"]
