@@ -55,15 +55,23 @@ A student projet of [Ecole Centrale Lyon](https://www.ec-lyon.fr/) proposes
 * together with [a video of the tunnel system visit](https://youtu.be/LFbo13XAPHM?list=PLa8Oo5NLA557c-mo59j6hzNjpgubxctI3&t=638) (local [copy](https://projet.liris.cnrs.fr/vcitydata/TunNetGen/VideosBackup/Les_aretes_de_poisson_de_Lyon_-_PE_111.mp4))
 
 Quelques images extraites:
+
 * Des galeries
+
   <img src="Images/ec-lyon-fr/Murs_renfort_beton.png" alt="Murs: beton" width="500"/>
   <img src="Images/ec-lyon-fr/Murs_tagges.png" alt="Murs: tags" width="500"/>
   <img src="Images/ec-lyon-fr/Murs_de_brique.png" alt="Murs: brique" width="500"/>
+
 * Des chambres d'interconnexions
+
   <img src="Images/ec-lyon-fr/Chambre_de_connexion.png" alt="Chambre de connexion" width="500"/>
+
 * Des escaliers
+
   <img src="Images/ec-lyon-fr/Petit_Escalier.png" alt="Petit Escalier" width="500"/>
+
 * Des puits
+
   <img src="Images/ec-lyon-fr/Puit_chambre_de_base.png" alt="Puit: chambre de base" width="500"/>
   <img src="Images/ec-lyon-fr/Puit_vue_du_bas.png" alt="Puit: vue du bas" width="500"/>
   <img src="Images/ec-lyon-fr/Puit_equipes_d_echelle.png" alt="Puit: echelles" width="500"/>
@@ -72,9 +80,13 @@ Quelques images extraites:
 The local tv short presentation 
 [A Lyon, un patrimoine méconnu : le mystère des arêtes de poisson](https://www.youtube.com/watch?v=cPv_Rm5rkHU) (local [copy](https://projet.liris.cnrs.fr/vcitydata/TunNetGen/VideosBackup/France_3_un_patrimoine_meconnu.mp4)) 
 provides the following pictures
+
 * Galeries
+
   <img src="Images/France_3/France_3_Escaliers_descendants.png" alt="Escaliers: descente" width="500"/>
- * Puits:
+
+* Puits:
+
   <img src="Images/France_3/France_3_Puit_vu_d_en_haut.png" alt="Puit: vue d'en haut." width="500"/>
 
 ### Axolot strange stopover in Lyon
@@ -82,13 +94,20 @@ This [short story](https://youtu.be/CS7fwV--c3c?t=711)
 (local [copy](https://projet.liris.cnrs.fr/vcitydata/TunNetGen/VideosBackup/Axolot_etrange_Escale_a_Lyon.mp4)) provides the following pictures
 
 * Puits:
+  
   <img src="Images/Axolot_Etrange_escale/Axolot_acces_puit.png" alt="Puit: trape acces." width="500"/>
+  
 * Galeries
+  
   <img src="Images/Axolot_Etrange_escale/Axolot_graphiti_one.png" alt="Gallerie: un tag." width="500"/>
   <img src="Images/Axolot_Etrange_escale/Axolot_graphiti_two.png" alt="Gallerie: autre tag." width="500"/>
+  
 * Des chambres d'interconnexions
+  
   <img src="Images/Axolot_Etrange_escale/Axolot_chambre_interconnexion.png" alt="Chambre interconnection." width="500"/>
+  
 * Objets exotiques:
+
   <img src="Images/Axolot_Etrange_escale/Axolot_furniture.png" alt="Objet exotique." width="500"/>
 
 
