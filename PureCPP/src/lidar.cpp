@@ -17,7 +17,8 @@ void lidar::record(const gbl::vec3& pos, const sdfable& sc, std::ostream& os)
       gbl::vec3 dir(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta));
       gbl::vec3 intersection;
       if(raymarch(pos, dir, sc, intersection))
-        os << std::setprecision (15) << intersection << '\n';
+        os << std::setprecision (15) << intersection << ' '
+          << sc.normal(intersection)<< '\n';
 
       theta+=dtheta;
     }

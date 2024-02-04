@@ -1,5 +1,17 @@
 #include "scene.h"
 
+gbl::vec3 sdfable::normal(const gbl::vec3& p, double eps) const
+{
+    return gbl::normalize(gbl::vec3{
+        sdf(gbl::vec3(p.x() + eps, p.y(), p.z()))
+          - sdf(gbl::vec3(p.x() - eps, p.y(), p.z())),
+        sdf(gbl::vec3(p.x(), p.y() + eps, p.z()))
+          - sdf(gbl::vec3(p.x(), p.y() - eps, p.z())),
+        sdf(gbl::vec3(p.x(), p.y(), p.z() + eps))
+          - sdf(gbl::vec3(p.x(), p.y(), p.z() - eps))
+        });
+}
+
 // All of the sdf are based on Inigo Quilez work
 // https://iquilezles.org/articles/distfunctions/
 // which is licensed under the MIT license
@@ -90,7 +102,6 @@ double opScale::sdf(const gbl::vec3& p) const
 {
   return h->sdf(p/s)*s;
 }
-
 
 opTranslate::opTranslate(std::shared_ptr<sdfable> to_translate,
  const gbl::vec3& translation):

@@ -13,6 +13,7 @@
 struct sdfable
 {
   virtual double sdf(const gbl::vec3& p) const = 0;
+  gbl::vec3 normal(const gbl::vec3& p, double eps=1e-3) const;
 };
 
 struct plan : sdfable
