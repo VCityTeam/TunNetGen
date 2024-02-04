@@ -5,6 +5,7 @@
 #include <vector>
 #include <limits>
 #include <random>
+#include <filesystem>
 
 #include "CLI11.hpp"
 
@@ -21,7 +22,9 @@ int main(int argc, char* argv[])
   std::string out = "out.xyz";
   app.add_option("-o, --out", out, "Output filename as an .xyz");
   int n_sample = 500;
-  app.add_option("-N, --num_sample", n_sample, "Numbers of samples for the lidar");
+  app.add_option("-N, --num_sample", n_sample, "Numbers of samples for the lidar in phi and in theta, point cloud size is then NxN");
+  bool splitted = false;
+  app.add_flag("-S, --splitted", splitted, "Split the resulting point cloud by lidar if enabled");
 
   CLI11_PARSE(app, argc, argv);
 
@@ -31,7 +34,7 @@ int main(int argc, char* argv[])
   std::shared_ptr<sdfable> main = std::make_shared<cylinder>(p00, p01, 1.0);
   main = std::make_shared<opInv>(main);
 
-  // Add the laterals 
+  // Add the laterals
   for(int i = -8; i<=8; i+=4)
   {
     gbl::vec3 p10{float(i), -5.0, 0.0};
@@ -40,9 +43,9 @@ int main(int argc, char* argv[])
     main = std::make_shared<opSub>(main, c0);
   }
 
-  // Displacement function to have non homogeneous wall 
+  // Displacement function to have non homogeneous wall
   auto f = [](const gbl::vec3& p)
-  {    
+  {
     // Based on www.shadertoy.com/view/4dS3Wd
     // By Morgan McGuire @morgan3d, http://graphicscodex.com
     // Reuse permitted under the BSD license.
@@ -59,7 +62,7 @@ int main(int argc, char* argv[])
       using gbl::dot;
       using gbl::floor;
       using gbl::fract;
-      
+
     const vec3 step(110.0, 241.0, 171.0);
     const vec3 i = floor(x);
     const vec3 f = fract(x);
@@ -86,27 +89,45 @@ int main(int argc, char* argv[])
     return fbm(p);
   };
 
-  // Add noise 
+  // Add noise
   main = std::make_shared<opDisplace>(main, f);
 
   // Translate to be in Lyon and scale by 10
   const gbl::vec3 lyon{1842822.798333, 5176402.986592, 0.0};
   main = std::make_shared<opScale>(main, 10.0);
   main = std::make_shared<opTranslate>(main, lyon);
-  
-  // Create the lidar sensor and the destination file
-  std::ofstream ofs(out);
+
+  // Create all the poses of the lidars
+  std::vector<gbl::vec3> poses = {
+    gbl::vec3{0.0, 0.0, 0.0} ,
+    gbl::vec3{-5.0, 0.0, 0.0},
+    gbl::vec3{-9.0, 0.0, 0.0},
+    gbl::vec3{5.0, 0.0, 0.0} ,
+    gbl::vec3{8.5, 0.0, 0.0} ,
+    gbl::vec3{8.0, 1.0, 0.0} };
+  for(auto& p: poses)
+    p = p*10.0+lyon;
+
+  // Create the lidar sensor
   lidar mlidar;
   mlidar.Nphi = n_sample;
   mlidar.Ntheta = n_sample;
 
-  // different poses because the cave network is big 
-  mlidar.record(gbl::vec3{0.0, 0.0, 0.0}  * 10.0 + lyon, *main, ofs);
-  mlidar.record(gbl::vec3{-5.0, 0.0, 0.0} * 10.0 + lyon, *main, ofs);
-  mlidar.record(gbl::vec3{-9.0, 0.0, 0.0} * 10.0 + lyon, *main, ofs);
-  mlidar.record(gbl::vec3{5.0, 0.0, 0.0}  * 10.0 + lyon, *main, ofs);
-  mlidar.record(gbl::vec3{8.5, 0.0, 0.0}  * 10.0 + lyon, *main, ofs);
-  mlidar.record(gbl::vec3{8.0, 1.0, 0.0}  * 10.0 + lyon, *main, ofs);
+  // Run the acquisition
+  std::ofstream ofs(out);
+  if(splitted)
+    for(const auto& p:poses)
+      ofs << std::setprecision (15) << p << '\n';
+  std::filesystem::path outpath(out);
+  for(unsigned i=0;i<poses.size();++i){
+    if(splitted){
+      out = outpath.stem().string()
+        + "-" + std::to_string(i)
+        + outpath.extension().string();
+      ofs = std::ofstream(out);
+    }
+    mlidar.record(poses[i], *main, ofs);
+  }
 
   return 0;
 }

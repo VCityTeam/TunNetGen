@@ -31,4 +31,3 @@ If you want to check the container state, you can run
 ```bash
 docker run --rm -it -v $(pwd)/data:/TunNetGenCpp/output vcity/tunnetgencpp:latest sh
 ```
-

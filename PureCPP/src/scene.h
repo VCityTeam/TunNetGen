@@ -42,6 +42,15 @@ struct cylinder : sdfable
   double sdf(const gbl::vec3& p) const;
 };
 
+struct cappedCone : sdfable
+{
+  gbl::vec3 p0, p1;
+  double radius_a, radius_b;
+
+  cappedCone(const gbl::vec3& a, const gbl::vec3& b, double ra, double rb);
+  double sdf(const gbl::vec3& p) const;
+};
+
 struct opSub : sdfable
 {
   std::shared_ptr<sdfable> h_to_keep, h_to_sub;

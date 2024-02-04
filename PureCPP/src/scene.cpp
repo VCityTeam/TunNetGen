@@ -1,6 +1,6 @@
 #include "scene.h"
 
-// All of the sdf are based on Inigo Quilez work 
+// All of the sdf are based on Inigo Quilez work
 // https://iquilezles.org/articles/distfunctions/
 // which is licensed under the MIT license
 
@@ -25,6 +25,33 @@ cylinder::cylinder(const gbl::vec3& a, const gbl::vec3& b, double r) :
   gbl::vec3 pa(p - p0), ba(p1 - p0);
   double h = clamp( gbl::dot(pa,ba)/gbl::dot(ba,ba), 0.0, 1.0 );
   return norm( pa - ba*h ) - radius;
+}
+
+// UNTESTED
+cappedCone::cappedCone(const gbl::vec3& a, const gbl::vec3& b, double ra, double rb) :
+  p0(a), p1(b), radius_a(ra), radius_b(rb){}
+  double cappedCone::sdf(const gbl::vec3& p) const
+{
+  using gbl::dot;
+  using std::max;
+  using std::min;
+  const auto& ra=radius_a, rb = radius_b;
+  const auto& a=p0, b = p1;
+
+  float rba  = rb-ra;
+  float baba = dot(b-a,b-a);
+  float papa = dot(p-a,p-a);
+  float paba = dot(p-a,b-a)/baba;
+  float x = sqrt( papa - paba*paba*baba );
+  float cax = max(0.0,x-((paba<0.5)?radius_a:radius_b));
+  float cay = abs(paba-0.5)-0.5;
+  float k = rba*rba + baba;
+  float f = clamp( (rba*(x-ra)+paba*baba)/k, 0.0, 1.0 );
+  float cbx = x-ra - f*rba;
+  float cby = paba - f;
+  float s = (cbx<0.0 && cay<0.0) ? -1.0 : 1.0;
+  return s*sqrt( min(cax*cax + cay*cay*baba,
+                     cbx*cbx + cby*cby*baba) );
 }
 
 opSub::opSub(std::shared_ptr<sdfable> to_keep, std::shared_ptr<sdfable> to_sub) :

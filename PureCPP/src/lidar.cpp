@@ -17,7 +17,7 @@ void lidar::record(const gbl::vec3& pos, const sdfable& sc, std::ostream& os)
       gbl::vec3 dir(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta));
       gbl::vec3 intersection;
       if(raymarch(pos, dir, sc, intersection))
-        os << std::setprecision (15) << intersection << std::endl;
+        os << std::setprecision (15) << intersection << '\n';
 
       theta+=dtheta;
     }
@@ -25,7 +25,7 @@ void lidar::record(const gbl::vec3& pos, const sdfable& sc, std::ostream& os)
   }
 }
 
-bool lidar::raymarch(const gbl::vec3& pos, const gbl::vec3& dir, 
+bool lidar::raymarch(const gbl::vec3& pos, const gbl::vec3& dir,
   const sdfable& sc, gbl::vec3& intersection)
 {
   float depth = 0.0f;
@@ -33,7 +33,7 @@ bool lidar::raymarch(const gbl::vec3& pos, const gbl::vec3& dir,
   for (int i = 0; i < 2000; ++i) {
     float dist = sc.sdf(pos + depth * dir);
     // warning : these parameter comes from nowhere
-    if (dist < 0.01) {
+    if (dist < 0.001) {
       intersection = pos + depth*dir;
       return true;
     }
