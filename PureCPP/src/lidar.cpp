@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <numbers>  // For pi
 
 #include "lidar.h"
 
