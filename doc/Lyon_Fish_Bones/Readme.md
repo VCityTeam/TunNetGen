@@ -1,4 +1,4 @@
-# Public information on 
+# Public information on Lyon "fish-bones"
 
 ## Table of content
 
@@ -9,11 +9,16 @@
   - [Cybele-lyon website](#cybele-lyon-website)
   - [Tribune de Lyon website](#tribune-de-lyon-website)
   - [France 3	Rhône Auvergne](#france-3%09rh%C3%B4ne-auvergne)
+  - [Nico Mathieux's exploratory video](#nico-mathieuxs-exploratory-video)
+  - [Patrimoine-lyon.org](#patrimoine-lyonorg)
 - [Geographic localization](#geographic-localization)
-  - [GESLYON website: geographical coordinatese](#geslyon-website-geographical-coordinatese)
+  - [GESLYON website: geographical coordinates](#geslyon-website-geographical-coordinates)
 - [Pictures](#pictures)
   - [Ecole Central Lyon: an exploratory video](#ecole-central-lyon-an-exploratory-video)
   - [France 3	Rhône Auvergne](#france-3%09rh%C3%B4ne-auvergne)
+  - [Axolot strange stopover in Lyon](#axolot-strange-stopover-in-lyon)
+  - [Urbex.me Urban exploration of Lyon fish-bones](#urbexme-urban-exploration-of-lyon-fish-bones)
+  - [Patrimoine-lyon.org](#patrimoine-lyonorg)
 
 <!-- /TOC -->
 
@@ -35,11 +40,30 @@ Another artistic view extracted du site https://tribunedelyon.fr
 The local tv short presentation 
 [A Lyon, un patrimoine méconnu : le mystère des arêtes de poisson](https://www.youtube.com/watch?v=cPv_Rm5rkHU) 
 provides this diagram
- <img src="Images/France_3/France_3_Rendu_3d_structural.png" alt="Escaliers: descente" width="500"/>
+
+<img src="Images/France_3/France_3_Rendu_3d_structural.png" alt="Escaliers: descente" width="500"/>
+
+### Nico Mathieux's exploratory video
+
+The following maps are given by 
+[Nico Mathieux's "J'explore les souterrains secrets de Lyon"](https://youtu.be/xFiAFDLI1FY) 
+(in french, [local copy](https://projet.liris.cnrs.fr/vcitydata/TunNetGen/VideosBackup/Nico_Mathieux_-_J_explore_les_souterrains_secrets_de_Lyon.mp4)):
+
+* [Map including so called North extension](https://youtu.be/xFiAFDLI1FY?t=398)
+  <img src="./Images/Nico_Mathieux/Nico_Mathieux_-_Je_visite_les_souterrains_secrets_de_Lyon_-_plan_global_temps_397_seconds.png" alt="Annotated map" width="500"/>
+* [Annotated map (time=327s)](https://youtu.be/xFiAFDLI1FY?t=327)
+  <img src="./Images/Nico_Mathieux/Nico_Mathieux_-_Je_visite_les_souterrains_secrets_de_Lyon_-_map_annotateds_with_graphiti_objets_locations_time_327_seconds.png" alt="Annotated map" width="500"/>
+ 
+### Patrimoine-lyon.org
+
+The [www.patrimoine-lyon.org](https://www.patrimoine-lyon.org) presents, within
+the UNESCO section of Lyon, some information concerning
+[the fish-bones](https://www.patrimoine-lyon.org/secteur_unesco/croix-rousse/le-bas-des-pentes/le-reseau-des-aretes-de-poisson) among which this map
+<img src="./Images/patrimoine-lyon-org/pentes_cx-r_aretes_de_poisson-ts1656797698.jpg" alt="Annotated map" width="500"/>
 
 ## Geographic localization
 
-### GESLYON website: geographical coordinatese
+### GESLYON website: geographical coordinates
 The following map (taken from [this article](https://www.ges-lyon.fr/croix-rousse-les-aretes-de-poisson-2022-05-09-851.html)) 
 
 ![yet another one](https://www.ges-lyon.fr/wp-content/uploads/2022/05/aretes-d-epoisson-2-1024x537.jpg) 
@@ -109,6 +133,44 @@ This [short story](https://youtu.be/CS7fwV--c3c?t=711)
 * Objets exotiques:
 
   <img src="Images/Axolot_Etrange_escale/Axolot_furniture.png" alt="Objet exotique." width="500"/>
+
+### Urbex.me Urban exploration of Lyon fish-bones
+
+This [`Urbex.me` urban exploration](https://www.urbex.me/explorations-urbaines/sous-terre/les-aretes-de-poisson) integrates the following pictures
+
+<img src="Images/Urbex_Me/urbex_adp_01.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_02.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_03.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_04.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_05.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_06.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_07.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_08.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_09.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_10.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_11.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_12.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_13.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_14.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_15.jpg" alt="Urbex.me" width="500"/>
+<img src="Images/Urbex_Me/urbex_adp_16.jpg" alt="Urbex.me" width="500"/>
+
+### Patrimoine-lyon.org
+
+The [www.patrimoine-lyon.org](https://www.patrimoine-lyon.org) presents, within
+the UNESCO section of Lyon, some information concerning
+[the fish-bones](https://www.patrimoine-lyon.org/secteur_unesco/croix-rousse/le-bas-des-pentes/le-reseau-des-aretes-de-poisson) 
+among which the following pictures
+
+<img src="./Images/patrimoine-lyon-org/pentes_cx-r_photo-1_bis-ts1656797698.jpg" alt="view" width="500"/>
+<img src="./Images/patrimoine-lyon-org/pentes_cx-r_photo-2-bis-ts1656797699.jpg" alt="view" width="500"/>
+<img src="./Images/patrimoine-lyon-org/pentes_cx-r_photo-3-bis-ts1656797699.jpg" alt="view" width="500"/>
+<img src="./Images/patrimoine-lyon-org/pentes_cx-r_photo-4-bis-ts1656797700.jpg" alt="view" width="500"/>
+<img src="./Images/patrimoine-lyon-org/pentes_cx-r_photo-5-bis-ts1656797701.jpg" alt="view" width="500"/>
+<img src="./Images/patrimoine-lyon-org/pentes_cx-r_photo-6-bis-ts1656797701.jpg" alt="view" width="500"/>
+
+
+
 
 
 
