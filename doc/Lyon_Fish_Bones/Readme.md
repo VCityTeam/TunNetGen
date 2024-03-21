@@ -10,6 +10,8 @@
   - [Tribune de Lyon website](#tribune-de-lyon-website)
   - [France 3	Rhône Auvergne](#france-3%09rh%C3%B4ne-auvergne)
   - [HAL sciences humaines et sociales article 01864593](#hal-sciences-humaines-et-sociales-article-01864593)
+  - [Revue Archeologique de l'Est](#revue-archeologique-de-lest)
+  - [Souterrain-Lyon](#souterrain-lyon)
   - [Nico Mathieux's exploratory video](#nico-mathieuxs-exploratory-video)
   - [Patrimoine-lyon.org](#patrimoine-lyonorg)
   - [Aretedepoisson.free.fr](#aretedepoissonfreefr)
@@ -44,7 +46,7 @@ A first schema offered by https://cybele-lyon.fr
 ### Tribune de Lyon website
 Another artistic view extracted du site https://tribunedelyon.fr
 ![Autre schema en 3D](https://tribunedelyon.fr/wp-content/uploads/sites/5/2023/05/eg-vue-aretes-de-poisson-tronchere-cottet-rattache-au-service-archeologique-de-la-ville-de-lyon-1024x451.jpg)
- ([local copy](./Images/tribunedeblyon-fr_-_eg-vue-aretes-de-poisson-tronchere-cottet-rattache-au-service-archeologique-de-la-ville-de-lyon-1024x451.jpg))
+ ([local copy](./Images/Tribune_De_Lyon/tribunedeblyon-fr_-_eg-vue-aretes-de-poisson-tronchere-cottet-rattache-au-service-archeologique-de-la-ville-de-lyon-1024x451.jpg))
 
 ### France 3	Rhône Auvergne
 The local tv short presentation 
@@ -68,6 +70,25 @@ provides this other diagram
 
 <img src="./Images/HALshs-01864593/HALshs-01864593-Main_alignement_view.png" alt="Main alignement view" width="500"/>
 
+### Revue Archeologique de l'Est
+
+Armand DESBAT's article, 
+["Le sanctuaire des trois Gaules et la question du forum provincial"](https://journals.openedition.org/rae/8902),
+published in Tome 65 (2016, number 188 of Revue Archéologique de l'Est) gives
+a detail of tunnel alignements
+<img src="./Images/Revue_Archeologique_Est/revue-archeologique-de-l_est-img-20.jpg" alt="RAE alignements" width="500"/>
+
+### Souterrain-Lyon
+
+The 
+["Les arêtes de poisson"](https://www.souterrain-lyon.com/aretes-de-poisson/)
+article provided by the 
+[souterrain-lyon.com website](https://www.souterrain-lyon.com)
+provides the following tunnel-system cross sections
+
+<img src="./Images/Souterrain-lyon-com/galerie-ossements-humains-coupe-longitudinale.jpg" alt="RAE alignements" width="500"/>
+<img src="./Images/Souterrain-lyon-com/galerie-ossements-humains-section.jpg" alt="RAE alignements" width="500"/>
+
 ### Nico Mathieux's exploratory video
 
 The following maps are given by 
@@ -75,15 +96,19 @@ The following maps are given by
 (in french, [local copy](https://projet.liris.cnrs.fr/vcitydata/TunNetGen/VideosBackup/Nico_Mathieux_-_J_explore_les_souterrains_secrets_de_Lyon.mp4)):
 
 [Map including so called North extension (time=397s)](https://youtu.be/xFiAFDLI1FY?t=398)
+
 <img src="./Images/Nico_Mathieux/Nico_Mathieux_-_Je_visite_les_souterrains_secrets_de_Lyon_-_plan_global_temps_397_seconds.png" alt="Annotated map" width="500"/>
 
 [Annotated map (time=327s)](https://youtu.be/xFiAFDLI1FY?t=327)
+
 <img src="./Images/Nico_Mathieux/Nico_Mathieux_-_Je_visite_les_souterrains_secrets_de_Lyon_-_map_annotateds_with_graphiti_objets_locations_time_327_seconds.png" alt="Annotated map" width="500"/>
 
 [Cross section map (time=395s)](https://youtu.be/xFiAFDLI1FY?t=395)
+
 <img src="./Images/Nico_Mathieux/Nico_Mathieux_-_Je_visite_les_souterrains_secrets_de_Lyon_-_carte_section_verticale_time_395_seconds.png" alt="Vertical cross section" width="500"/>
 
 [Main section map (time=385s)](https://youtu.be/xFiAFDLI1FY?t=385)
+
 <img src="./Images/Nico_Mathieux/Nico_Mathieux_-_Je_visite_les_souterrains_secrets_de_Lyon_-_carte_partie_principale_time_395_seconds.png" alt="Vertical cross section" width="500"/>
  
 ### Patrimoine-lyon.org
@@ -91,6 +116,7 @@ The following maps are given by
 The [www.patrimoine-lyon.org](https://www.patrimoine-lyon.org) presents, within
 the UNESCO section of Lyon, some information concerning
 [the fish-bones](https://www.patrimoine-lyon.org/secteur_unesco/croix-rousse/le-bas-des-pentes/le-reseau-des-aretes-de-poisson) among which this map
+
 <img src="./Images/patrimoine-lyon-org/pentes_cx-r_aretes_de_poisson-ts1656797698.jpg" alt="Annotated map" width="500"/>
 
 ### Aretedepoisson.free.fr
