@@ -1,21 +1,8 @@
 import bmesh
 import math
 import mathutils
-
-# We cannot use folder relative file importation e.g.
-#     from bmesh_utils import ...
-# because the "blender --python [...]" does some tricks
-import sys, os
-
-sys.path.append(os.path.dirname(__file__))
+import bpyhelpers
 from bmesh_half_sphere import bmesh_of_half_icosphere
-from bmesh_utils import (
-    bmesh_from_data,
-    bmesh_triangulate_quad_faces,
-    bmesh_join,
-    bmesh_get_boundary_edges,
-    bmesh_assert_genus_number_boundaries,
-)
 
 
 class cylinder:
@@ -98,14 +85,14 @@ class cylinder:
             for row in range(0, number_of_rows - 1):
                 data["faces"].extend(self.face(i, row))
 
-        bmesh_cylinder = bmesh_from_data(data)
+        bmesh_cylinder = bpyhelpers.bmesh_from_data(data)
         bmesh.ops.rotate(
             bmesh_cylinder,
             verts=bmesh_cylinder.verts,
             matrix=mathutils.Matrix.Rotation(math.radians(90.0), 4, "Y"),
         )
 
-        bmesh_assert_genus_number_boundaries(
+        bpyhelpers.bmesh_assert_genus_number_boundaries(
             bmesh_cylinder, 0, 2, "Open-ended cylinder topology is wrong."
         )
         return bmesh_cylinder
@@ -134,7 +121,7 @@ class cylinder:
         # algorithm, will add new faces to bridge/gap the half-spheres with
         # the cylinder. And we don't want those faces to be degenerated (having
         # a zero size along the z axis).
-        self.segments = len(bmesh_get_boundary_edges(bmesh_X_plus_cap))
+        self.segments = len(bpyhelpers.bmesh_get_boundary_edges(bmesh_X_plus_cap))
         length_before_cap = math.pi * 2 * self.radius / self.segments
         bmesh.ops.translate(
             bmesh_X_plus_cap,
@@ -151,7 +138,9 @@ class cylinder:
         ### Tap the first cylinder end (the one standing on X=0 plane)
         # Note that after joining AND before bridge_looping we still have two
         # (disconnected) components.
-        bmesh_one_cap_cylinder = bmesh_join([bmesh_X_plus_cap, bmesh_cylinder])
+        bmesh_one_cap_cylinder = bpyhelpers.bmesh_join(
+            [bmesh_X_plus_cap, bmesh_cylinder]
+        )
 
         # The cylinder has two ends. We must designate the edges
         EPSILON = 0.1  # FIXME: should depend on subdivisions
@@ -161,14 +150,12 @@ class cylinder:
             if ele.is_boundary and ele.verts[0].co.x <= 0.1
         ]
 
-        bridge = bmesh.ops.bridge_loops(
-            bmesh_one_cap_cylinder, edges=edges_to_bridge
-        )
+        bridge = bmesh.ops.bridge_loops(bmesh_one_cap_cylinder, edges=edges_to_bridge)
         # The bridging algorithm creates quad faces that must be triangulated
-        bmesh_triangulate_quad_faces(bmesh_one_cap_cylinder, bridge["faces"])
+        bpyhelpers.bmesh_triangulate_quad_faces(bmesh_one_cap_cylinder, bridge["faces"])
         del bridge
 
-        bmesh_assert_genus_number_boundaries(
+        bpyhelpers.bmesh_assert_genus_number_boundaries(
             bmesh_one_cap_cylinder,
             0,
             1,
@@ -185,15 +172,15 @@ class cylinder:
             vec=(self.length + length_before_cap, 0.0, 0.0),
         )
 
-        bmesh_capped_cylinder = bmesh_join(
+        bmesh_capped_cylinder = bpyhelpers.bmesh_join(
             [bmesh_X_minus_cap, bmesh_one_cap_cylinder]
         )
         bridge = bmesh.ops.bridge_loops(
             bmesh_capped_cylinder,
-            edges=bmesh_get_boundary_edges(bmesh_capped_cylinder),
+            edges=bpyhelpers.bmesh_get_boundary_edges(bmesh_capped_cylinder),
         )
         # The bridging algorithm creates quad faces that must be triangulated
-        bmesh_triangulate_quad_faces(bmesh_capped_cylinder, bridge["faces"])
+        bpyhelpers.bmesh_triangulate_quad_faces(bmesh_capped_cylinder, bridge["faces"])
         del bridge
 
         if centered:
@@ -202,7 +189,7 @@ class cylinder:
                 verts=bmesh_capped_cylinder.verts,
                 vec=(-self.length / 2.0, 0.0, 0.0),
             )
-        bmesh_assert_genus_number_boundaries(
+        bpyhelpers.bmesh_assert_genus_number_boundaries(
             bmesh_capped_cylinder,
             0,
             0,

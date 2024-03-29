@@ -1,14 +1,6 @@
 import bpy
 import bmesh
-
-# We cannot use folder relative file importation e.g.
-#     from bmesh_utils import ...
-# because the "blender --python [...]" does some tricks
-import sys, os
-
-#
-sys.path.append(os.path.dirname(__file__))
-from bmesh_utils import bmesh_get_boundary_edges
+import bpyhelpers
 
 
 ######################## UI related
@@ -45,6 +37,6 @@ def get_mesh_boundary_edges(object):
     # We need to "convert" the UI "Mesh" type to a bmesh type.
     b_mesh = bmesh.new()  # Create a temporary bmesh container instance
     b_mesh.from_mesh(object.data)
-    edges = bmesh_get_boundary_edges(b_mesh)
+    edges = bpyhelpers.bmesh_get_boundary_edges(b_mesh)
     b_mesh.free()
     return edges

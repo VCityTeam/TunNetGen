@@ -1,20 +1,54 @@
 
 # Python API of Blender (bpy) generated geometries
 
+<!-- TOC -->
+
+- [Installation](#installation)
+- [Running things](#running-things)
+- [Blender tricks](#blender-tricks)
+- [References](#references)
+- [Modeling notes](#modeling-notes)
+- [Issues](#issues)
+  - [Why is it required for PYTHONPATH to point to the virtual environnement](#why-is-it-required-for-pythonpath-to-point-to-the-virtual-environnement)
+
+<!-- /TOC -->
+
+## Installation
+
+```bash
+python3.10 -m venv venv
+source venv/bin/activate
+(venv) pip install -r requirements.txt
+```
+
+Because of 
+[this issue](#why-is-it-required-for-pythonpath-to-point-to-the-virtual-environnement)
+you will further need to define the following `PYTHONPATH` environnement 
+variable
+```bash
+(venv) export PYTHONPATH=`pwd`:`pwd`/venv/lib/python3.10/site-packages
+```
+
 ## Running things
 
 ```bash
 blender --python UI_half_sphere.py
+```
+<img src="Pictures/Two_half_spheres.png" alt="Blender Python Two Half Sphere" width="500"/>
+
+```bash
 blender --python UI_cylinder.py 
 ```
+<img src="Pictures/Cylinder_and_both_ended_capped_cylinder.png" alt="Blender Python Two Cylinders" width="500"/>
 
 ```bash
 blender --python UI_two_intersecting_cylinders.py 
 ```
 should yield something like
+
 <img src="Pictures/Two_Intersecting_Cylinders.png" alt="Blender Python Two Cylinders" width="800"/>
 
-And
+Additionally
 ```bash
 blender --python UI_a_couple_of_cylinders.py  
 ```
@@ -38,6 +72,22 @@ should yield something like
 
 ## Modeling notes
 
+## Issues
 
+### Why is it required for PYTHONPATH to point to the virtual environnement
 
+The reasons for having to define the `PYTHONPATH` environnement variable are
+probably [hinted/documented in this blender stackexchange thread](https://blender.stackexchange.com/questions/181928/does-blender-use-a-python-virtual-environment). 
+The difficulty can be simply illustrated with the following set of commands
+
+```bash
+(venv) export PYTHONPATH='pure junk'     # Just making sure it is not set
+(venv) python -c "import bpyhelpers"     # OK
+(venv) echo "import bpyhelpers" > script.py
+(venv) blender --python script.py        # FAILS with
+  [...]
+  File "<somepath>/script.py", line 1, in <module>
+    import bpyhelpers
+  ModuleNotFoundError: No module named 'bpyhelpers'
+```
 

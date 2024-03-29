@@ -1,13 +1,6 @@
 import bpy
 import bmesh
-
-# We cannot use folder relative file importation e.g.
-#     from bmesh_utils import ...
-# because the "blender --python [...]" does some tricks
-import sys, os
-
-sys.path.append(os.path.dirname(__file__))
-from UI_utils import promote_bmesh_to_UI_object, UI_cleanup_default_scene
+import bpyhelpers
 from bmesh_half_sphere import bmesh_of_half_icosphere
 
 if __name__ == "__main__":
@@ -28,15 +21,15 @@ if __name__ == "__main__":
     )
 
     ### Deal with the UI
-    UI_cleanup_default_scene()
+    bpyhelpers.UI_cleanup_default_scene()
 
-    obj_half_sphere_facing_X_plus = promote_bmesh_to_UI_object(
+    obj_half_sphere_facing_X_plus = bpyhelpers.UI_promote_bmesh_to_UI_object(
         bmesh_half_sphere_facing_X_plus,
         "Half_Sphere_facing_X_plus",
     )
     bpy.context.collection.objects.link(obj_half_sphere_facing_X_plus)
 
-    obj_half_sphere_facing_X_minus = promote_bmesh_to_UI_object(
+    obj_half_sphere_facing_X_minus = bpyhelpers.UI_promote_bmesh_to_UI_object(
         bmesh_half_sphere_facing_X_minus,
         "Half_Sphere_facing_X_minus",
     )

@@ -1,27 +1,13 @@
 import bpy
 import bmesh
+import bpyhelpers
 import math
 import mathutils
-
-
-# We cannot use folder relative file importation e.g.
-#     from bmesh_utils import ...
-# because the "blender --python [...]" does some tricks
-import sys, os
-
-sys.path.append(os.path.dirname(__file__))
 from bmesh_cylinder import cylinder
-from bmesh_utils import bmesh_assert_genus_number_boundaries
-from UI_utils import (
-    promote_bmesh_to_UI_object,
-    UI_cleanup_default_scene,
-    UI_boolean_union,
-    demote_UI_object_with_mesh_to_bmesh,
-)
 
 
 if __name__ == "__main__":
-    UI_cleanup_default_scene()
+    bpyhelpers.UI_cleanup_default_scene()
 
     subdivisions = 3
     ### A lenghty (compared to the transverses) cylinder.
@@ -31,7 +17,7 @@ if __name__ == "__main__":
         radius=radius, length=length
     ).bmesh_of_cylinder_with_taps(subdivisions=subdivisions, centered=False)
 
-    obj_base_cylinder = promote_bmesh_to_UI_object(
+    obj_base_cylinder = bpyhelpers.UI_promote_bmesh_to_UI_object(
         bmesh_base_cylinder, "BaseCylinder"
     )
     bpy.context.collection.objects.link(obj_base_cylinder)
@@ -57,15 +43,15 @@ if __name__ == "__main__":
             verts=bmesh_transverse_cylinder.verts,
             vec=(1.0 + i_trans * offset, 0.0, 0.0),
         )
-        obj_transverse_cylinder = promote_bmesh_to_UI_object(
+        obj_transverse_cylinder = bpyhelpers.UI_promote_bmesh_to_UI_object(
             bmesh_transverse_cylinder, "Tranverse"
         )
         bpy.context.collection.objects.link(obj_transverse_cylinder)
-        UI_boolean_union(obj_base_cylinder, obj_transverse_cylinder)
+        bpyhelpers.UI_boolean_union(obj_base_cylinder, obj_transverse_cylinder)
 
-    bmesh_result = demote_UI_object_with_mesh_to_bmesh(obj_base_cylinder)
+    bmesh_result = bpyhelpers.UI_demote_UI_object_with_mesh_to_bmesh(obj_base_cylinder)
 
-    bmesh_assert_genus_number_boundaries(
+    bpyhelpers.bmesh_assert_genus_number_boundaries(
         bmesh_result,
         0,
         0,

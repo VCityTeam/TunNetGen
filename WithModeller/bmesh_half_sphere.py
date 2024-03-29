@@ -1,18 +1,8 @@
 import sys
+import bpyhelpers
 import bmesh
 import mathutils
 import math
-
-# We cannot use folder relative file importation e.g.
-#     from bmesh_utils import ...
-# because the "blender --python [...]" does some tricks
-import sys, os
-
-sys.path.append(os.path.dirname(__file__))
-from bmesh_utils import (
-    bmesh_assert_genus_number_boundaries,
-    bmesh_get_boundary_edges,
-)
 
 
 def bmesh_of_half_icosphere(radius, subdivisions, angle):
@@ -85,9 +75,7 @@ def bmesh_of_half_icosphere(radius, subdivisions, angle):
     )
     bmesh.ops.bisect_plane(
         bmesh_result,
-        geom=bmesh_result.verts[:]
-        + bmesh_result.edges[:]
-        + bmesh_result.faces[:],
+        geom=bmesh_result.verts[:] + bmesh_result.edges[:] + bmesh_result.faces[:],
         dist=0,
         plane_co=(0.0, 0.0, 0.0),
         plane_no=(0.0, 0.0, 1.0),
@@ -99,9 +87,7 @@ def bmesh_of_half_icosphere(radius, subdivisions, angle):
     # and arbitrary) threshold criteria.
     expected_boundary_edge_count = 10 * 2 ** (subdivisions - 2)
 
-    expected_boundary_edge_length = (
-        2 * math.pi * radius / expected_boundary_edge_count
-    )
+    expected_boundary_edge_length = 2 * math.pi * radius / expected_boundary_edge_count
     edge_length_threshold = expected_boundary_edge_length / 2.0
 
     degenerated_boundary_edges = [
@@ -120,7 +106,9 @@ def bmesh_of_half_icosphere(radius, subdivisions, angle):
     )
 
     # Check that the correction was efficient:
-    resulting_boundary_edge_count = len(bmesh_get_boundary_edges(bmesh_result))
+    resulting_boundary_edge_count = len(
+        bpyhelpers.bmesh_get_boundary_edges(bmesh_result)
+    )
     if expected_boundary_edge_count != resulting_boundary_edge_count:
         print(
             "Warning: wrong number of resulting boundary edge count: ",
@@ -130,7 +118,7 @@ def bmesh_of_half_icosphere(radius, subdivisions, angle):
             resulting_boundary_edge_count,
         )
 
-    bmesh_assert_genus_number_boundaries(
+    bpyhelpers.bmesh_assert_genus_number_boundaries(
         bmesh_result, 0, 1, "Half-sphere topology is wrong."
     )
 
