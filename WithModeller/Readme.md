@@ -21,10 +21,11 @@ source venv/bin/activate
 (venv) pip install -r requirements.txt
 ```
 
-Because of 
-[this issue](#why-is-it-required-for-pythonpath-to-point-to-the-virtual-environnement)
-you will further need to define the following `PYTHONPATH` environnement 
-variable
+If you wish to interact with the resulting geometries with the help of the
+blender UI (that is use commands of the form `blender --python <some_script.py>`),
+and because of 
+[this issue](#why-is-it-required-for-pythonpath-to-point-to-the-virtual-environnement),
+you will further need to define the following `PYTHONPATH` environnement variable
 ```bash
 (venv) export PYTHONPATH=`pwd`:`pwd`/venv/lib/python3.10/site-packages
 ```
