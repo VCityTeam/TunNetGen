@@ -4,6 +4,7 @@
 <!-- TOC -->
 
 - [Installation](#installation)
+- [Interacting with the resulting geometries](#interacting-with-the-resulting-geometries)
 - [Running things](#running-things)
 - [Blender tricks](#blender-tricks)
 - [References](#references)
@@ -21,13 +22,30 @@ source venv/bin/activate
 (venv) pip install -r requirements.txt
 ```
 
+Then running a script is the traditional invocation e.g.
+
+```bash
+(venv) python cylinder_example.py -v --subdivision 5
+```
+
+## Interacting with the resulting geometries
+
 If you wish to interact with the resulting geometries with the help of the
 blender UI (that is use commands of the form `blender --python <some_script.py>`),
 and because of 
 [this issue](#why-is-it-required-for-pythonpath-to-point-to-the-virtual-environnement),
-you will further need to define the following `PYTHONPATH` environnement variable
+you will further need to define the following `PYTHONPATH` environnement 
+variable
+
 ```bash
 (venv) export PYTHONPATH=`pwd`:`pwd`/venv/lib/python3.10/site-packages
+```
+
+Using Blender UI with the constructed is achieved with e.g (**mind the 
+additional " -- " argument**)
+
+```bash
+blender --python cylinder_example.py -- -v --subdivision 4
 ```
 
 ## Running things
