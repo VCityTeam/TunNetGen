@@ -1,3 +1,4 @@
+import os
 import sys
 import argparse
 import bpy
@@ -35,6 +36,12 @@ def parse_arguments():
         help="Lenght of the cylinder (without the half-sphere caps)",
         default=5.5,
         type=float,
+    )
+    parser.add_argument(
+        "--outputdir",
+        help="Directory for resulting PLY files",
+        default=".",
+        type=str,
     )
     if "--" in sys.argv:
         # We probably are running this script in UI mode (that is with commands
@@ -108,6 +115,7 @@ def main():
         + str(args.length)
         + "_triangulation.ply"
     )
+    triangulation_filename = os.path.join(args.outputdir, triangulation_filename)
 
     # "bpy.ops" methods apply on the objects that are selected (and sometimes
     # additionnaly to active objects). We thus have to select the cylinder
