@@ -5,6 +5,7 @@
   - [Building without cloning](#building-without-cloning)
   - [Building after cloning](#building-after-cloning)
 - [Running things](#running-things)
+- [Debugging teh container](#debugging-teh-container)
 
 <!-- /TOC -->
 
@@ -27,17 +28,21 @@ docker build -t vcity/tunnetgenmodeller -f docker/PureCPP/Dockerfile .
 
 ## Running things
 
-In order to obtain the flags/options of TunNetGenCpp one can run
+In order to obtain the flags/options of e.g. the cylinder example one can run
+
 ```bash
 docker run --rm vcity/tunnetgenmodeller cylinder_example.py --help
 ```
 
-In order to obtain the resulting PLY format files, you must provide the 
-`outputdir` that matches the mounted volume e.g.
+In order to obtain the resulting PLY format files, you must provide an the 
+`--outputdir` flag with an argument that matches the mounted volume e.g.
 
 ```bash
 docker run --rm -v $(pwd)/data:/Output vcity/tunnetgenmodeller cylinder_example.py --subdivision 5 --outputdir /Output 
 ```
+
+that should create a `data/` directory within the invocation directory with
+the expected `PLY` format files.
 
 ## Debugging teh container
 If you want to check the container state, you can run
