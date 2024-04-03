@@ -5,7 +5,10 @@
 
 - [Installation](#installation)
 - [Interacting with the resulting geometries](#interacting-with-the-resulting-geometries)
-- [Running things](#running-things)
+- [Running the examples](#running-the-examples)
+  - [A capped cylinder](#a-capped-cylinder)
+  - [Two intersecting capped cylinders](#two-intersecting-capped-cylinders)
+  - [A small set of intersecting cylinders](#a-small-set-of-intersecting-cylinders)
 - [Blender tricks](#blender-tricks)
 - [References](#references)
 - [Modeling notes](#modeling-notes)
@@ -48,25 +51,62 @@ additional " -- " argument**)
 blender --python cylinder_example.py -- -v --subdivision 4
 ```
 
-## Running things
+## Running the examples
+
+Here is a list of some examples
 
 ```bash
 blender --python UI_half_sphere.py
 ```
 <img src="Pictures/Two_half_spheres.png" alt="Blender Python Two Half Sphere" width="500"/>
 
-```bash
-blender --python UI_cylinder.py 
-```
+### A capped cylinder
 <img src="Pictures/Cylinder_and_both_ended_capped_cylinder.png" alt="Blender Python Two Cylinders" width="500"/>
 
+### Two intersecting (capped) cylinders
+With the Blender UI
 ```bash
-blender --python UI_two_intersecting_cylinders.py 
+blender --python two_intersecting_cylinders_example.py -- --radius 1.5 --length 6.0 --subdivision 4
 ```
+
 should yield something like
 
 <img src="Pictures/Two_Intersecting_Cylinders.png" alt="Blender Python Two Cylinders" width="800"/>
 
+In headless mode (without the Blender UI) the "two intersecting cylinders" 
+example translates to 
+
+```bash
+python two_intersecting_cylinders_example.py --radius 1.5 --length 6.0 --subdivision 5
+```
+
+In both cases (with/without the UI) two files using a `PLY` format are created
+(use the `--outputdir` flag to modify the output directory, refer to the usage
+`python two_intersecting_cylinders_example.py --help`).
+
+**Caveat emptor**: Blender boolean "union" operator that is used under the hood
+for intersecting triangles appear to be quite sensible-to/dependent-on the 
+geometry its mesh inputs. This weakness becomes numerically apparent because 
+the examples assert the resulting topology (as opposed to a simple visual 
+check for which the result seems correct yet not water-tight).
+For example Blender union operator is not that robust with
+ - "high" resolution meshes (that is with a "large" number of triangles),
+ - arbitrary geometrical positions that do not "suit" the algorithm.
+
+As a consequence and depending on the input parameters 
+`two_intersecting_cylinders_example.py` often fails. For example a 
+`--subdivision` value bigger than 6 makes things fail...
+
+Here is a short list of working examples, that should work for subdivision 
+values in the `[2, 6]` range:
+- `python two_intersecting_cylinders_example.py --radius 0.4 --length 2.0 --subdivision 5`
+- `python two_intersecting_cylinders_example.py --radius 0.75 --length 4.0 --subdivision 5`
+- `python two_intersecting_cylinders_example.py --radius 0.75 --length 6.0 --subdivision 5`
+- `python two_intersecting_cylinders_example.py --radius 1.5 --length 6.0 --subdivision 3`
+- ...
+
+
+### A small set of intersecting cylinders
 Additionally
 ```bash
 blender --python UI_a_couple_of_cylinders.py  
