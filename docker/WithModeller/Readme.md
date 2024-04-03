@@ -49,7 +49,7 @@ the expected `PLY` format files.
 
 ```bash
 docker run --rm -v $(pwd)/data:/Output vcity/tunnetgenmodeller cylinder_example.py --outputdir /Output --radius 0.4 --length 2.0 --subdivision 5
-docker run --rm -v $(pwd)/data:/Output vcity/tunnetgenmodeller cylinder_example.py --outputdir /Output --radius 0.75 --length 6.0 --subdivision 6
+docker run --rm -v $(pwd)/data:/Output vcity/tunnetgenmodeller two_intersecting_cylinders_example.py --outputdir /Output --radius 0.75 --length 6.0 --subdivision 6
 ```
 
 ## Debugging the container
