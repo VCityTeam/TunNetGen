@@ -55,5 +55,5 @@ docker run --rm -v $(pwd)/data:/Output vcity/tunnetgenmodeller two_intersecting_
 ## Debugging the container
 If you want to check the container state, you can run
 ```bash
-docker run --rm -it --entrypoint bash  vcity/tunnetmodeller
+docker run --rm -it --entrypoint bash  vcity/tunnetgenmodeller
 ```
